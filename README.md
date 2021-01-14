@@ -2,7 +2,7 @@
 
 Files for the Multiscale Mechanics for Industrial Applications Winter School, 11-15 January 2021, Tsinghua Uiversity, Beijing, China
 
-[More information](https://aml.tsinghua.edu.cn/) and [schedule](https://github.com/xuzhiping/multiscale_winterschool_2021/Winter_School_Schedule.pdf)
+[More information](https://aml.tsinghua.edu.cn/) and [schedule](https://github.com/xuzhiping/multiscale_winterschool_2021/Schedule.pdf)
 
 Tutorial files can be found in this repository, and many of the presentations are available on [Bilibili](https://www.bilibili.com).
 
