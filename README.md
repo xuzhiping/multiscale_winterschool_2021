@@ -4,11 +4,11 @@ Files for the Multiscale Mechanics for Industrial Applications Winter School, 11
 
 [More information](https://aml.tsinghua.edu.cn/) and [schedule](https://github.com/xuzhiping/multiscale_winterschool_2021/Winter_School_Schedule.pdf)
 
-Many of the presentations are available [on Bilibili](https://www.bilibili.com)
+Tutorial files can be found in this repository, and many of the presentations are available on [Bilibili](https://www.bilibili.com).
 
 ## Day 1 Presentations
 
-* [Welcome and Introduction](https://github.com/xuzhiping/multiscale_winterschool_2021/day1-01-Introduction-ZhipingXu.pdf)
+* [Welcome and Introduction](https://github.com/xuzhiping/multiscale_winterschool_2021/day1-01-Introduction-ZhipingXu.pdf), [[Bilibili video]](https://www.bilibili.com)
 * [Multiscale Mechanics in Metallic Alloys](https://github.com/xuzhiping/multiscale_winterschool_2021/day1-02-Metallic-Alloys-ZheLiu.pdf), [[Bilibili video]](https://www.bilibili.com)
 * [Multiscale Mechanics in Polymer Composites](https://github.com/xuzhiping/multiscale_winterschool_2021/day1-03-Polymer-Composites-PengCao.pdf), [[Bilibili video]](https://www.bilibili.com)
 * [High Performance Computation](https://github.com/xuzhiping/multiscale_winterschool_2021/day1-04-HPC-JiaoLin.pdf), [[Bilibili video]](https://www.bilibili.com)
