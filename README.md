@@ -26,7 +26,7 @@ Many of the presentations are available [on Bilibili](https://www.bilibili.com)
 ## Day 4 Presentations
 
 * [Machine Learning](https://github.com/xuzhiping/multiscale_winterschool_2021/day4-01-DEEPMD-HanWang.pdf), [[Bilibili video]](https://www.bilibili.com)
-* [Coarse Graining](https://github.com/xuzhiping/multiscale_winterschool_2021/day4-02-CG-Xinghua Shi.pdf), [[Bilibili video]](https://www.bilibili.com)
+* [Coarse Graining](https://github.com/xuzhiping/multiscale_winterschool_2021/day4-02-CG-XinghuaShi.pdf), [[Bilibili video]](https://www.bilibili.com)
 
 ## Day 5 Presentations
 
