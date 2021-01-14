@@ -31,4 +31,4 @@ Many of the presentations are available [on Bilibili](https://www.bilibili.com)
 ## Day 5 Presentations
 
 * [Phase Field](https://github.com/xuzhiping/multiscale_winterschool_2021/day5-01-PF-YongNi.pdf), [[Bilibili video]](https://www.bilibili.com)
-* [Composites](https://github.com/xuzhiping/multiscale_winterschool_2021/day5-02-Composites-Yilun Liu.pdf), [[Bilibili video]](https://www.bilibili.com)
+* [Composites](https://github.com/xuzhiping/multiscale_winterschool_2021/day5-02-Composites-YilunLiu.pdf), [[Bilibili video]](https://www.bilibili.com)
