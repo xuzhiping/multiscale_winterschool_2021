@@ -1,0 +1,172 @@
+LAMMPS (29 Oct 2020)
+# LAMMPS input file for streching Nanotwinned Cu samples.
+# strain rate: 5e8 1/s
+
+# Initialize simulation
+# processors 3 2 2
+units metal
+dimension 3
+boundary p p p
+atom_style atomic
+
+# read_data nanotwinned_Cu.data
+
+# Create atomic configuration of nanotwinned Cu sample
+lattice fcc 3.615
+Lattice spacing in x,y,z = 3.6150000 3.6150000 3.6150000
+region whole  block -0.1 100.18 0.0 106.2 0.0 102.2 units box
+create_box 1 whole
+Created orthogonal box = (-0.1 0.0000000 0.0000000) to (100.18000 106.20000 102.20000)
+  1 by 2 by 2 MPI processor grid
+
+region matrix1 block  INF 25.045 INF INF INF INF  units box
+lattice fcc 3.615 orient x  1 1 1 orient y  -1 -1 2  orient z  1 -1 0
+Lattice spacing in x,y,z = 6.2613637 5.9032703 5.1123820
+create_atoms 1 region matrix1
+Created 23040 atoms
+  create_atoms CPU = 0.003 seconds
+
+region twin1  block  25.045 50.091 INF INF INF INF  units box
+lattice fcc 3.615 orient x 1 1 -1 orient y  1 1 2  orient z  1 -1 0
+Lattice spacing in x,y,z = 6.2613637 5.9032703 5.1123820
+create_atoms 1 region twin1
+Created 24960 atoms
+  create_atoms CPU = 0.002 seconds
+
+region matrix2  block  50.091 75.136 INF INF INF INF  units box
+lattice fcc 3.615 orient x  1 1 1 orient y  -1 -1 2  orient z  1 -1 0
+Lattice spacing in x,y,z = 6.2613637 5.9032703 5.1123820
+create_atoms 1 region matrix2
+Created 21120 atoms
+  create_atoms CPU = 0.003 seconds
+
+region twin2  block  75.136 INF INF INF INF INF  units box
+lattice fcc 3.615 orient x 1 1 -1 orient y  1 1 2  orient z  1 -1 0
+Lattice spacing in x,y,z = 6.2613637 5.9032703 5.1123820
+create_atoms 1 region twin2
+Created 23040 atoms
+  create_atoms CPU = 0.002 seconds
+
+# Define force field
+pair_style eam/alloy
+pair_coeff * * Cu_mishin1.eam.alloy Cu
+Reading eam/alloy potential file Cu_mishin1.eam.alloy with DATE: 2007-10-12
+neighbor 2.0 bin
+neigh_modify delay 1 check yes
+
+# Computes and variables
+compute myPE  all pe/atom
+compute myKE  all ke/atom
+
+variable cna equal "3.615*(1+1/sqrt(2))/2"
+compute myCNA all cna/atom ${cna}
+compute myCNA all cna/atom 3.08559550699468
+
+# Stresses
+compute	patoms all stress/atom	NULL
+compute	avestress all reduce ave c_patoms[1] c_patoms[2] c_patoms[3]
+
+variable atomv 	  equal 11.81040834
+
+variable astress1 equal "0.0001*c_avestress[1]/(v_atomv)"
+variable astress2 equal "0.0001*c_avestress[2]/(v_atomv)"
+variable astress3 equal "0.0001*c_avestress[3]/(v_atomv)"
+
+variable sigma11 equal "v_astress1"
+variable sigma22 equal "v_astress2"
+variable sigma33 equal "v_astress3"
+
+variable p11 equal "-pxx/10000"
+variable p22 equal "-pyy/10000"
+variable p33 equal "-pzz/10000"
+
+variable        pstr1 atom "0.0001*c_patoms[1]/(v_atomv)"
+variable        pstr2 atom "0.0001*c_patoms[2]/(v_atomv)"
+variable        pstr3 atom "0.0001*c_patoms[3]/(v_atomv)"
+variable        pstr4 atom "0.0001*c_patoms[4]/(v_atomv)"
+variable        pstr5 atom "0.0001*c_patoms[5]/(v_atomv)"
+variable        pstr6 atom "0.0001*c_patoms[6]/(v_atomv)"
+
+# Energy minimization
+# dump            1 all custom 100  ./min/nt_cu_*.txt id type x y z
+min_style cg
+minimize 1e-7 1e-6 7000 8000
+WARNING: Using 'neigh_modify every 1 delay 0 check yes' setting during minimization (../min.cpp:187)
+Neighbor list info ...
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 7.50679
+  ghost atom cutoff = 7.50679
+  binsize = 3.753395, bins = 27 29 28
+  2 neighbor lists, perpetual/occasional/extra = 1 1 0
+  (1) pair eam/alloy, perpetual
+      attributes: half, newton on
+      pair build: half/bin/atomonly/newton
+      stencil: half/bin/3d/newton
+      bin: standard
+  (2) compute cna/atom, occasional
+      attributes: full, newton on
+      pair build: full/bin/atomonly
+      stencil: full/bin/3d
+      bin: standard
+Per MPI rank memory allocation (min/avg/max) = 22.65 | 22.65 | 22.65 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0   -326152.86            0   -326152.86   -16.126732 
+      25            0   -326205.16            0   -326205.16   -336.37521 
+Loop time of 2.65781 on 4 procs for 25 steps with 92160 atoms
+
+99.9% CPU use with 4 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = energy tolerance
+  Energy initial, next-to-last, final = 
+     -326152.855386419  -326205.148580504  -326205.156431272
+  Force two-norm initial, final = 26.535478 0.20969937
+  Force max component initial, final = 0.39806977 0.0029405946
+  Final line search alpha, max atom move = 1.0000000 0.0029405946
+  Iterations, force evaluations = 25 50
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 2.5546     | 2.5689     | 2.5948     |   1.0 | 96.66
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0.030643   | 0.056099   | 0.070908   |   6.5 |  2.11
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.03279    |            |       |  1.23
+
+Nlocal:        23040.0 ave       23060 max       23020 min
+Histogram: 2 0 0 0 0 0 0 0 0 2
+Nghost:        20429.0 ave       20449 max       20409 min
+Histogram: 2 0 0 0 0 0 0 0 0 2
+Neighs:    1.62816e+06 ave 1.63865e+06 max 1.61778e+06 min
+Histogram: 1 1 0 0 0 0 0 0 1 1
+FullNghs:      0.00000 ave           0 max           0 min
+Histogram: 4 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 6512640
+Ave neighs/atom = 70.666667
+Neighbor list builds = 0
+Dangerous builds = 0
+# undump 1
+
+# Relaxation
+reset_timestep 0
+timestep 0.001
+velocity all create 300.0 587636
+fix 1 all npt temp 300.0 300.0 0.1 x 0.0 0.0 1.0 y 0.0 0.0 1.0 z 0.0 0.0 1.0
+fix 2 all ave/atom 1 100 1000 v_pstr1 v_pstr2 v_pstr3 v_pstr4 v_pstr5 v_pstr6
+fix 3 all print 1000 "${sigma11} ${sigma22} ${sigma33} ${p11} ${p22} ${p33}" file relax_Cu.txt screen no
+dump  1  all custom 100000  ./relax/Cu_relax_*.txt id type x y z  c_myPE c_myKE c_myCNA f_2[1] f_2[2] f_2[3] f_2[4] f_2[5] f_2[6]
+
+# Set thermo output
+thermo 1000
+thermo_style custom step lx ly lz vol press pxx pyy pzz pe ke etotal temp
+
+# Run for 200 picosecond
+
+# restart    100000  ./restart/relax_*.restart
+
+run 200000
+ERROR on proc 0: Cannot open dump file (../dump.cpp:612)
