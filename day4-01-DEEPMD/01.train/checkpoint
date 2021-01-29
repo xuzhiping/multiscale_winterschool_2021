@@ -1,0 +1,2 @@
+model_checkpoint_path: "/gpfs01/train1_work/winterschool/day4/deeplearning/01.train/model.ckpt"
+all_model_checkpoint_paths: "/gpfs01/train1_work/winterschool/day4/deeplearning/01.train/model.ckpt"
