@@ -1,0 +1,30 @@
+SYSTEM = graphene
+ENCUT   =750
+# Ionic relaxation
+EDIFF   = 1E-5  !  low accuracy
+EDIFFG  = -0.001  !force
+PREC   = normal
+#NELM   = 100      !   maximum electronic steps
+NELMIN  = 2         !  minimum electronic steps
+#NELMDL  = -8     ! update of charge for 3 steps        (for continuation: 0)
+#IBRION  = 2        !  use CG algorithm for ions
+#NSW     = 150    ! No. of steps for ion
+POTIM   = 0.2
+#ALGO    = Fast    ! RMM-DIIS algorithm for electrons
+LREAL   = .FALSE.       ! evaluate projection operators in real space
+#NPAR   = 4
+NSIM    = 1       ! blocked algorithm update, four bands a time
+# LELF = .TRUE.
+# LORBIT = 11       !to calculate TDOS and PDOS of each atom
+# NBANDS = 288 
+#   EMIN   = -25.00;   EMAX   = 15.00  energy-range for DOS
+#   NEDOS =   401      mesh points for DOS
+#   ISMEAR =-5
+   ISMEAR = 0
+   SIGMA = 0.05
+#ISPIN=2
+#ICHARG=1
+LCHARG=F
+ISIF=3
+#IVDW=11
+LWAVE   =  .FALSE.

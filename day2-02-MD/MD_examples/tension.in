@@ -1,0 +1,121 @@
+# LAMMPS input file for streching Nanotwinned Cu samples.
+# strain rate: 5e8 1/s
+
+# Initialize simulation 
+# processors 3 2 2 
+units metal 
+dimension 3 
+boundary p p p 
+atom_style atomic 
+
+# read_data nanotwinned_Cu.data
+
+# Create atomic configuration of nanotwinned Cu sample  
+lattice fcc 3.615
+region whole  block -0.1 100.18 0.0 106.2 0.0 102.2 units box
+create_box 1 whole 
+
+region matrix1 block  INF 25.045 INF INF INF INF  units box
+lattice fcc 3.615 orient x  1 1 1 orient y  -1 -1 2  orient z  1 -1 0 
+create_atoms 1 region matrix1
+
+region twin1  block  25.045 50.091 INF INF INF INF  units box
+lattice fcc 3.615 orient x 1 1 -1 orient y  1 1 2  orient z  1 -1 0 
+create_atoms 1 region twin1
+
+region matrix2  block  50.091 75.136 INF INF INF INF  units box
+lattice fcc 3.615 orient x  1 1 1 orient y  -1 -1 2  orient z  1 -1 0 
+create_atoms 1 region matrix2
+
+region twin2  block  75.136 INF INF INF INF INF  units box
+lattice fcc 3.615 orient x 1 1 -1 orient y  1 1 2  orient z  1 -1 0
+create_atoms 1 region twin2
+
+# Define force field
+pair_style eam/alloy
+pair_coeff * * Cu_mishin1.eam.alloy Cu
+neighbor 2.0 bin
+neigh_modify delay 1 check yes
+
+# Computes and variables
+compute myPE  all pe/atom 
+compute myKE  all ke/atom 
+
+variable cna equal "3.615*(1+1/sqrt(2))/2"
+compute myCNA all cna/atom ${cna}
+
+# Stresses
+compute	patoms all stress/atom	NULL
+compute	avestress all reduce ave c_patoms[1] c_patoms[2] c_patoms[3]
+
+variable atomv 	  equal 11.81040834
+
+variable astress1 equal "0.0001*c_avestress[1]/(v_atomv)"
+variable astress2 equal "0.0001*c_avestress[2]/(v_atomv)"
+variable astress3 equal "0.0001*c_avestress[3]/(v_atomv)"
+
+variable sigma11 equal "v_astress1"
+variable sigma22 equal "v_astress2"
+variable sigma33 equal "v_astress3"
+
+variable p11 equal "-pxx/10000"
+variable p22 equal "-pyy/10000"
+variable p33 equal "-pzz/10000"
+
+variable        pstr1 atom "0.0001*c_patoms[1]/(v_atomv)"
+variable        pstr2 atom "0.0001*c_patoms[2]/(v_atomv)"
+variable        pstr3 atom "0.0001*c_patoms[3]/(v_atomv)"
+variable        pstr4 atom "0.0001*c_patoms[4]/(v_atomv)"
+variable        pstr5 atom "0.0001*c_patoms[5]/(v_atomv)"
+variable        pstr6 atom "0.0001*c_patoms[6]/(v_atomv)"
+
+# Energy minimization
+# dump            1 all custom 100  ./min/nt_cu_*.txt id type x y z
+min_style cg 
+minimize 1e-7 1e-6 7000 8000
+# undump 1
+
+# Relaxation 
+reset_timestep 0
+timestep 0.001
+velocity all create 300.0 587636  
+fix 1 all npt temp 300.0 300.0 0.1 x 0.0 0.0 1.0 y 0.0 0.0 1.0 z 0.0 0.0 1.0 
+fix 2 all ave/atom 1 100 1000 v_pstr1 v_pstr2 v_pstr3 v_pstr4 v_pstr5 v_pstr6
+fix 3 all print 1000 "${sigma11} ${sigma22} ${sigma33} ${p11} ${p22} ${p33}" file relax_Cu.txt screen no
+dump  1  all custom 100000  ./relax/Cu_relax_*.txt id type x y z  c_myPE c_myKE c_myCNA f_2[1] f_2[2] f_2[3] f_2[4] f_2[5] f_2[6]
+
+# Set thermo output
+thermo 1000
+thermo_style custom step lx ly lz vol press pxx pyy pzz pe ke etotal temp 
+
+# Run for 200 picosecond 
+
+# restart    100000  ./restart/relax_*.restart
+
+run 200000
+
+undump 1
+unfix 1
+unfix 2
+unfix 3
+
+# Define strain_xx
+variable         tmp equal "lx"                                                        
+variable         L0 equal ${tmp}
+variable         strain equal "(lx - v_L0)/v_L0"
+print 			 "Initial Length, L0: ${L0}"
+
+# Deformation
+reset_timestep 0
+fix 1 all npt temp 300.0 300.0 0.1 y 0.0 0.0 1.0 z 0.0 0.0 1.0
+fix 2 all ave/atom 1 100 1000 v_pstr1 v_pstr2 v_pstr3 v_pstr4 v_pstr5 v_pstr6
+fix 3 all deform 1 x erate 0.0005 units box remap x
+fix 4 all print 1000 "${strain} ${sigma11} ${sigma22} ${sigma33}" file Cu_def_stress.txt screen no
+dump  1  all custom 2000  ./def/Cu_def_*.txt id type x y z  c_myPE c_myKE c_myCNA f_2[1] f_2[2] f_2[3] f_2[4] f_2[5] f_2[6]
+
+# restart    200000  ./restart/def_*.restart
+
+run		   200000
+
+# SIMULATION DONE
+print "All done"

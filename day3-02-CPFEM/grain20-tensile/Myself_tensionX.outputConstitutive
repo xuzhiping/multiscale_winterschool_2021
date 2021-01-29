@@ -1,0 +1,8 @@
+
+[TWIP-FeMnC]
+
+(plasticity)	dislotwin
+edge_density	  12
+dipole_density	  12
+shear_rate_slip	  12
+twin_fraction	  12

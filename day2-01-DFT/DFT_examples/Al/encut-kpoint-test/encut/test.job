@@ -1,0 +1,17 @@
+#!/bin/bash
+###################   find $i  ############################
+for i in  200 250 300 350  400  450 500 550 600
+#for i in 0.16 0.17  0.18 0.19 0.20 0.21 0.22 0.24 0.26 0.27 0.28 0.29 0.30 0.31 0.32 0.34 0.36
+###################   find $i  ###########################
+
+do
+
+sed "s/AAA/$i/g" INCAR0 >INCAR 
+
+mkdir $i
+cp  job.sh INCAR POTCAR POSCAR KPOINTS $i/
+cd $i
+sbatch job.sh>id
+cd ../
+
+done

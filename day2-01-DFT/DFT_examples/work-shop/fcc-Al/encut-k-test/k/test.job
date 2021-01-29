@@ -1,0 +1,17 @@
+#!/bin/bash
+###################   find $i  ############################
+#for i in  200 250 300 350  400  450 500 550 600
+for i in 6  8  10 12 14 16 18 20 22 24 26 
+###################   find $i  ###########################
+
+do
+
+sed "s/AAA/$i/g" KPOINTS0 > KPOINTS 
+
+mkdir $i
+cp  job.sh INCAR POTCAR POSCAR KPOINTS $i/
+cd $i
+sbatch job.sh>id
+cd ../
+
+done

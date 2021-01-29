@@ -1,0 +1,21 @@
+echo "#k" "	" "dielec" " " " char" "	" "Energy" "	" "time" >energy
+###################   find $i  ############################
+for i in 6 8 9 10 11 12 13 14 15 16 17 18 19 20 
+#for i in  200 250 300 350  400  450 500 550 600
+##################   find $i  ###########################
+
+do
+
+E=`grep -A 2 "free  energy   TOTEN  =" $i/OUTCAR |tail -1 | awk '{print $7}'`
+#F=`grep -A 2 "POSITION                                       TOTAL-FORCE (eV/Angst)" $i/OUTCAR  | tail -1 | awk '{print $4}'`
+#time=`grep "Total CPU time used (sec):" $i/OUTCAR  | awk '{print $6}'`
+#nkpts=`grep "NKPTS" $i/OUTCAR  | awk '{print $4}'`
+#dielec=`grep -A 5 "MACROSCOPIC STATIC DIELECTRIC TENSOR" $i/OUTCAR |tail -1`
+#char=`grep -A 34 "BORN EFFECTIVE CHARGES" $i/OUTCAR`
+echo $i "	" $dielec "	" $char "	" $E "	" $time>> energy
+
+  done
+
+
+
+

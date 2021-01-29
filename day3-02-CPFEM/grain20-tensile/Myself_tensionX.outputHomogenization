@@ -1,0 +1,10 @@
+
+[SX]
+
+(type)	none
+(ngrains)	   1
+(thermal)	isothermal
+(damage)	none
+(vacancyflux)	isoconcentration
+(porosity)	none
+(hydrogenflux)	isoconcentration

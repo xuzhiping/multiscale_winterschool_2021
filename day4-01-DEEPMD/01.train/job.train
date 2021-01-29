@@ -1,0 +1,14 @@
+#!/bin/sh
+#SBATCH -J dptrain
+#SBATCH -p course
+#SBATCH -N 1
+#SBATCH -o stdout.%j
+#SBATCH -e stderr.%j
+#SBATCH --no-requeue
+#SBATCH --ntasks-per-node=4
+module load compiles/intel/2019/u4/config
+module load lib/gcc/7.4.0/e5/config
+source /apps/soft/tesorflow/bin/activate
+dp train input.json
+dp freeze
+deactivate

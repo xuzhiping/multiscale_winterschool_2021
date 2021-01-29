@@ -1,0 +1,79 @@
+# LAMMPS input file for calculating the GSF energy curve for Cu.
+# Reference: Zhang Liang, Lu Cheng, Tieu Kiet, et al., Chin. Phys. B, 24, 8(2015)088106.
+
+# processors 7 2 2 
+units metal
+boundary p s p
+atom_style atomic
+
+variable lattice equal 3.615
+variable partial equal "v_lattice/sqrt(6)"
+variable cna equal 3.0856
+
+lattice fcc ${lattice} orient x 1 1 -2 orient y 1 1 1 orient z 1 -1 0
+region box block 0 21 0 20 0 20
+create_box 1 box
+create_atoms 1 box
+
+region up1 block INF INF 62 INF INF INF units box
+group up1 region up1
+region up2 block INF INF 64 INF INF INF units box
+group up2 region up2
+region energy block INF INF 45 80 INF INF units box
+group energy region energy
+
+neighbor 2.0 bin
+neigh_modify delay 1 check yes
+pair_style eam/alloy
+pair_coeff * * Cu_mishin1.eam.alloy Cu
+
+compute pe all pe/atom
+compute cna all cna/atom ${cna}
+
+compute  gbenergy energy reduce sum c_pe
+variable gbenergy equal c_gbenergy
+
+thermo 1
+thermo_style custom step temp pe ke etotal lx ly lz pxx pyy pzz c_gbenergy
+
+#dump 1 all cfg 1 cell.*.cfg id type xs ys zs c_cna c_pe
+#dump_modify 1 element Cu
+#dump 2 energy cfg 1 gsf.*.cfg id type xs ys zs c_cna c_pe
+#dump_modify 2 element Cu
+
+dump	1 all    custom 1 ./data/tot_*.txt id type x y z  c_cna c_pe
+
+#dump	2 energy custom 1 gsf_*.txt id type x y z  c_cna c_pe
+
+run 0
+
+variable gbenergy00 equal "v_gbenergy"
+variable gbenergy0 equal ${gbenergy00}
+
+label forloopp
+
+variable a loop 20
+variable p equal "v_partial/20"
+
+displace_atoms up1 move ${p} 0 0 units box
+variable gsf equal "(v_gbenergy-v_gbenergy0)/lx/lz*16.02*1000"   # unit: mJ/m2
+
+fix extra all print 1 "$a  ${gsf}" append gsfe_Cu.txt screen no
+run 1
+
+next a
+jump gsf.in forloopp
+
+label forloopt
+
+variable a loop 21 40
+variable p equal "v_partial/20"
+
+displace_atoms up2 move ${p} 0 0 units box
+variable gsf equal "(v_gbenergy-v_gbenergy0)/lx/lz*16.02*1000"
+
+fix extra all print 1 "$a ${gsf}" append gsfe_Cu.txt screen no 
+run 1
+
+next a
+jump gsf.in forloopt

@@ -1,0 +1,83 @@
+LAMMPS (29 Oct 2020)
+Lattice spacing in x,y,z = 3.6150000 3.6150000 3.6150000
+Created orthogonal box = (-0.1 0.0000000 0.0000000) to (100.18000 106.20000 102.20000)
+  1 by 2 by 2 MPI processor grid
+Lattice spacing in x,y,z = 6.2613637 5.9032703 5.1123820
+Created 23040 atoms
+  create_atoms CPU = 0.003 seconds
+Lattice spacing in x,y,z = 6.2613637 5.9032703 5.1123820
+Created 24960 atoms
+  create_atoms CPU = 0.002 seconds
+Lattice spacing in x,y,z = 6.2613637 5.9032703 5.1123820
+Created 21120 atoms
+  create_atoms CPU = 0.003 seconds
+Lattice spacing in x,y,z = 6.2613637 5.9032703 5.1123820
+Created 23040 atoms
+  create_atoms CPU = 0.002 seconds
+Reading eam/alloy potential file Cu_mishin1.eam.alloy with DATE: 2007-10-12
+WARNING: Using 'neigh_modify every 1 delay 0 check yes' setting during minimization (../min.cpp:187)
+Neighbor list info ...
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 7.50679
+  ghost atom cutoff = 7.50679
+  binsize = 3.753395, bins = 27 29 28
+  2 neighbor lists, perpetual/occasional/extra = 1 1 0
+  (1) pair eam/alloy, perpetual
+      attributes: half, newton on
+      pair build: half/bin/atomonly/newton
+      stencil: half/bin/3d/newton
+      bin: standard
+  (2) compute cna/atom, occasional
+      attributes: full, newton on
+      pair build: full/bin/atomonly
+      stencil: full/bin/3d
+      bin: standard
+Setting up cg style minimization ...
+  Unit style    : metal
+  Current step  : 0
+Per MPI rank memory allocation (min/avg/max) = 22.65 | 22.65 | 22.65 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0   -326152.86            0   -326152.86   -16.126732 
+      25            0   -326205.16            0   -326205.16   -336.37521 
+Loop time of 2.65781 on 4 procs for 25 steps with 92160 atoms
+
+99.9% CPU use with 4 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = energy tolerance
+  Energy initial, next-to-last, final = 
+     -326152.855386419  -326205.148580504  -326205.156431272
+  Force two-norm initial, final = 26.535478 0.20969937
+  Force max component initial, final = 0.39806977 0.0029405946
+  Final line search alpha, max atom move = 1.0000000 0.0029405946
+  Iterations, force evaluations = 25 50
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 2.5546     | 2.5689     | 2.5948     |   1.0 | 96.66
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0.030643   | 0.056099   | 0.070908   |   6.5 |  2.11
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.03279    |            |       |  1.23
+
+Nlocal:        23040.0 ave       23060 max       23020 min
+Histogram: 2 0 0 0 0 0 0 0 0 2
+Nghost:        20429.0 ave       20449 max       20409 min
+Histogram: 2 0 0 0 0 0 0 0 0 2
+Neighs:    1.62816e+06 ave 1.63865e+06 max 1.61778e+06 min
+Histogram: 1 1 0 0 0 0 0 0 1 1
+FullNghs:      0.00000 ave           0 max           0 min
+Histogram: 4 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 6512640
+Ave neighs/atom = 70.666667
+Neighbor list builds = 0
+Dangerous builds = 0
+Setting up Verlet run ...
+  Unit style    : metal
+  Current step  : 0
+  Time step     : 0.001
+ERROR on proc 0: Cannot open dump file (../dump.cpp:612)

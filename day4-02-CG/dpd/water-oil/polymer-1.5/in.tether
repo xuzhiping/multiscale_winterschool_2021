@@ -1,0 +1,39 @@
+log memcor10000.log
+units lj
+dimension 3
+boundary p p p
+atom_style angle
+neighbor 0.5 bin
+neigh_modify delay 2 every 1
+comm_modify vel yes
+read_data read.dat
+mass * 1.0
+group polymer type 1 2
+group water type 3
+group oil type 4
+bond_style harmonic
+bond_coeff 1 25 1.0 
+angle_style harmonic
+angle_coeff 1 3 180
+pair_style   dpd 1.0 1.0 61028  
+pair_coeff * *    25 4.5 1.0
+pair_coeff 1 2   30 4.5 1.0
+pair_coeff 1 4   40 4.5 1.0
+pair_coeff 2 3   40 4.5 1.0
+pair_coeff 2 4   20 4.5 1.0
+pair_coeff 3 4   35 4.5 1.0
+thermo 1000
+thermo_style custom step temp etotal vol density press ebond bonds
+thermo_modify lost ignore lost/bond ignore
+timestep 0.012
+dump 1 all xyz 1000 dump.xyz 
+fix 1 polymer rigid/nve single
+fix 2 polymer setforce 0.0 0.0 0.0
+min_style cg
+minimize 1.0e-5 1.0e-5 10000 10000
+
+unfix 1
+unfix 2
+
+fix 4 all nve
+run 300000
