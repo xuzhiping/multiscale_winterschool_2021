@@ -15,20 +15,20 @@ Tutorial files can be found in this repository, and many of the presentations ar
 
 ## Day 2 Presentations
 
-* [First-Principles Calculations](https://github.com/xuzhiping/multiscale_winterschool_2021/blob/master/day2-01-DFT-JiawangHong.pdf), [[Bilibili video]](https://www.bilibili.com)
-* [Molecular Dynamics](https://github.com/xuzhiping/multiscale_winterschool_2021/blob/master/day2-02-MD-XiaoyanLi.pdf), [[Bilibili video]](https://www.bilibili.com)
+* [First-Principles Calculations](https://github.com/xuzhiping/multiscale_winterschool_2021/blob/master/day2-01-DFT-JiawangHong.pdf), [[Examples]](https://github.com/xuzhiping/multiscale_winterschool_2021/blob/master/day2-01-DFT), [[Bilibili video]](https://www.bilibili.com)
+* [Molecular Dynamics](https://github.com/xuzhiping/multiscale_winterschool_2021/blob/master/day2-02-MD-XiaoyanLi.pdf), [[Examples]](https://github.com/xuzhiping/multiscale_winterschool_2021/blob/master/day2-02-MD), [[Bilibili video]](https://www.bilibili.com)
 
 ## Day 3 Presentations
 
-* [Dislocation Dynamics](https://github.com/xuzhiping/multiscale_winterschool_2021/blob/master/day3-01-DD-YinanCui.pdf), [[Bilibili video]](https://www.bilibili.com)
-* [Crystal Plasticity](https://github.com/xuzhiping/multiscale_winterschool_2021/blob/master/day3-02-CPFEM-XuZhang.pdf), [[Bilibili video]](https://www.bilibili.com)
+* [Dislocation Dynamics](https://github.com/xuzhiping/multiscale_winterschool_2021/blob/master/day3-01-DD-YinanCui.pdf), [[Examples]](https://github.com/xuzhiping/multiscale_winterschool_2021/blob/master/day3-01-DD), [[Bilibili video]](https://www.bilibili.com)
+* [Crystal Plasticity](https://github.com/xuzhiping/multiscale_winterschool_2021/blob/master/day3-02-CPFEM-XuZhang.pdf), [[Examples]](https://github.com/xuzhiping/multiscale_winterschool_2021/blob/master/day3-02-CPFEM), [[Bilibili video]](https://www.bilibili.com)
 
 ## Day 4 Presentations
 
-* [Machine Learning](https://github.com/xuzhiping/multiscale_winterschool_2021/blob/master/day4-01-DEEPMD-HanWang.pdf), [[Bilibili video]](https://www.bilibili.com)
-* [Coarse Graining](https://github.com/xuzhiping/multiscale_winterschool_2021/blob/master/day4-02-CG-XinghuaShi.pdf), [[Bilibili video]](https://www.bilibili.com)
+* [Machine Learning](https://github.com/xuzhiping/multiscale_winterschool_2021/blob/master/day4-01-DEEPMD-HanWang.pdf), [[Examples]](https://github.com/xuzhiping/multiscale_winterschool_2021/blob/master/day4-01-DEEPMD), [[Bilibili video]](https://www.bilibili.com)
+* [Coarse Graining](https://github.com/xuzhiping/multiscale_winterschool_2021/blob/master/day4-02-CG-XinghuaShi.pdf), [[Examples]](https://github.com/xuzhiping/multiscale_winterschool_2021/blob/master/day4-02-CG), [[Bilibili video]](https://www.bilibili.com)
 
 ## Day 5 Presentations
 
-* [Phase Field](https://github.com/xuzhiping/multiscale_winterschool_2021/blob/master/day5-01-PF-YongNi.pdf), [[Bilibili video]](https://www.bilibili.com)
-* [Composites](https://github.com/xuzhiping/multiscale_winterschool_2021/blob/master/day5-02-Composites-YilunLiu.pdf), [[Bilibili video]](https://www.bilibili.com)
+* [Phase Field](https://github.com/xuzhiping/multiscale_winterschool_2021/blob/master/day5-01-PF-YongNi.pdf), [[Examples]](https://github.com/xuzhiping/multiscale_winterschool_2021/blob/master/day5-01-PF), [[Bilibili video]](https://www.bilibili.com)
+* [Composites](https://github.com/xuzhiping/multiscale_winterschool_2021/blob/master/day5-02-Composites-YilunLiu.pdf), [[Examples]](https://github.com/xuzhiping/multiscale_winterschool_2021/blob/master/day5-02-Composites), [[Bilibili video]](https://www.bilibili.com)
