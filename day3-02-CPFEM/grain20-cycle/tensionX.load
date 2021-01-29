@@ -1,7 +1,0 @@
-fdot 1.0e-3 0 0  0 * 0   0 0 *  stress  * * *   * 0 *   * * 0  time 10  incs 100 freq 4
-fdot -1.0e-3 0 0  0 * 0   0 0 *  stress  * * *   * 0 *   * * 0  time 20  incs 200 freq 4
-fdot 1.0e-3 0 0  0 * 0   0 0 *  stress  * * *   * 0 *   * * 0  time 20  incs 200 freq 4
-fdot -1.0e-3 0 0  0 * 0   0 0 *  stress  * * *   * 0 *   * * 0  time 20  incs 200 freq 4
-fdot 1.0e-3 0 0  0 * 0   0 0 *  stress  * * *   * 0 *   * * 0  time 20  incs 200 freq 4
-fdot -1.0e-3 0 0  0 * 0   0 0 *  stress  * * *   * 0 *   * * 0  time 20  incs 200 freq 4
-fdot 1.0e-3 0 0  0 * 0   0 0 *  stress  * * *   * 0 *   * * 0  time 20  incs 200 freq 4

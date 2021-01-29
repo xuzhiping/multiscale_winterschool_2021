@@ -1,6 +1,0 @@
-export PATH=/apps/lib/anaconda/anaconda3/e5/bin:$PATH
-python3
-import dpdata
-d_outcar=dpdata.LabeledSystem('OUTCAR')
-d_outcar.to('deepmd/npy','datafortrain')
-exit()

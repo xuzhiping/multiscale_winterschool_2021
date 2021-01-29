@@ -1,1 +1,0 @@
-../01.train/frozen_model.pb
